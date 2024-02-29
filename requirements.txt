@@ -1,5 +1,6 @@
 bidict==0.22.1
 blinker==1.7.0
+wheel==0.42.0
 certifi==2023.11.17
 chardet==3.0.4
 charset-normalizer==3.3.2
