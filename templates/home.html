@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block content %}
+<div class="image">
+  <img src="{{ url_for('static', filename='img/logo.png') }}"/>
+</div>
+<div class="container">
+  <div class="title">Enter The Chat Room</div>
+  <form method="post" class="buttons">
+    <div class="user__details">
+      <div class="input__box">
+        <span class="details">Name</span>
+        <input type="text" name="name" value="{{name}}" placeholder="E.g: John Smith" required>
+        <div class="button">
+          <input type="submit" name="create" value="Create a Room">
+        </div>
+      </div>
+      <br>
+      <div class="input__box">
+        <span class="details">Room Code</span>
+        <input type="text" name="code" value="{{code}}" placeholder="Room Code">
+        <div class="button">
+          <input type="submit" name="join" value="Join a Room">
+        </div>
+      </div>
+      
+    </div>
+    
+    {% if error %}
+  <div class="error-text">
+    <p>{{error}}</p>
+  </div>
+  {% endif %}
+  </form>
+</div>
+
+<script>
+  // var socketio = io();
+  // console.log(socketio)
+</script>
+  
+  
+{% endblock %}
+ 
