@@ -231,5 +231,37 @@ def disconnect():
     except Exception as e:
         print(f"Disconnect handler error: {e}. Ignoring disconnection.")
 
+@socketio.on("changeLanguage")
+def LanguageChange(data):
+    print("Language changed")
+    print(data)
+    if isinstance(data, str):
+        try:
+            data = json.loads(data)
+        except json.JSONDecodeError:
+            print("Invalid JSON format for changeLanguage event.")
+            return
+        
+    new_language = data.get('language')
+    print("rooms",rooms)
+    print("rooms_data", rooms_data)
+
+    room = session.get("room")
+    
+    if room is None:
+        print("Room not found in session.")
+        return
+
+    user = next((u for u in rooms[room]["users"] if u["socket_id"] == request.sid), None)
+    print("user",user)
+    if user:
+        # user["language"] = new_language
+        # rooms[room]["users"]["language"] = new_language
+        rooms[room]["users"][rooms[room]["users"].index(user)]["language"] = new_language
+        print(f"User {user['name']} changed language to {new_language}")
+
+    print("Current rooms:", rooms)
+
+
 if __name__ == "__main__":
     socketio.run(app, debug=True, port=7500, host='0.0.0.0') 
